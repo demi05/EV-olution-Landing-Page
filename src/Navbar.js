@@ -1,19 +1,43 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useRef } from "react";
 
 const Navbar = () => {
+  const navRef = useRef();
+
+  const showNavBar = () => {
+    navRef.current.classList.toggle("responsive-nav");
+  };
+
   return (
-    <div className="nav-div">
+    <header className="nav-div">
       <div className="nav">
         <h2>EV-olution</h2>
-        <div className="nav-elements">
-          <Link to={"./"}>Home</Link>
-          <Link to={"./explore"}>Explore</Link>
-          <Link to={"./about"}>About</Link>
-          <Link to={"./contact"}>Contact</Link>
-        </div>
+        <nav className="nav-elements" ref={navRef}>
+          <Link to={"./"} onClick={showNavBar}>
+            Home
+          </Link>
+          <Link to={"./explore"} onClick={showNavBar}>
+            Explore
+          </Link>
+          <Link to={"./about"} onClick={showNavBar}>
+            About
+          </Link>
+          <Link to={"./contact"} onClick={showNavBar}>
+            Contact
+          </Link>
+
+          <button className="nav-btn nav-close-btn" onClick={showNavBar}>
+            <FontAwesomeIcon icon={faTimes} />
+          </button>
+        </nav>
+        <button className="nav-btn nav-open-btn" onClick={showNavBar}>
+          <FontAwesomeIcon icon={faBars} />
+        </button>
       </div>
-    </div>
+    </header>
   );
 };
 
